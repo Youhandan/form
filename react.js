@@ -65,10 +65,20 @@ function addReminder(text,inputAreaStyle,alertStyle,node) {
         document.getElementById("inputText").setAttribute("class", inputAreaStyle);
         p.appendChild(text);
         document.getElementById("inputItem").appendChild(p);
+        if(alertStyle=="alertSuccess"){
+            setTimeout(function () {
+                p.parentNode.removeChild(p);
+            },3000)
+        }
     }
     else {
         document.getElementById("inputText").setAttribute("class", inputAreaStyle);
         p.appendChild(text);
         document.getElementById("inputItem").appendChild(p);
+        if(alertStyle=="alertSuccess"){
+            setTimeout(function () {
+                p.parentNode.removeChild(p);
+            },3000)
+        }
     }
 }
