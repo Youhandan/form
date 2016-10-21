@@ -22,16 +22,37 @@ var EventUtil={
     }
 };
 
-var inputText=document.getElementById("inputText");
+
+
+
+
+
 var inputRecord=[];
-EventUtil.addHandle(inputText,"change",isChinese);
-var reg = /^[\u4e00-\u9fa5]+$/;
-var textNodeFail = document.createTextNode("标题中含有特殊字符，请修改~");
-var textNodeSuccess = document.createTextNode("真棒！这个标题可以使用~");
-var textNodeRepeat= document.createTextNode("这个标题已存在，请修改~");
+var inputText=document.getElementById("inputText");
+
+EventUtil.addHandle(inputText,"focus",showNumTag);
+EventUtil.addHandle(inputText,"blur",hiddenNumTag);
+EventUtil.addHandle(inputText,"input",isChinese);
+EventUtil.addHandle(inputText,"input",wordCount);
+
+function showNumTag() {
+    var numTag=document.getElementById("numTag");
+    numTag.style.visibility="visible";
+
+}
+
+function hiddenNumTag() {
+    var numTag=document.getElementById("numTag");
+    numTag.style.visibility="hidden";
+}
+
 
 
 function isChinese() {
+    var reg = /^[\u4e00-\u9fa5]+$/;
+    var textNodeFail = document.createTextNode("标题中含有特殊字符，请修改~");
+    var textNodeSuccess = document.createTextNode("真棒！这个标题可以使用~");
+    var textNodeRepeat= document.createTextNode("这个标题已存在，请修改~");
     var child = document.getElementById("alert");
     var str = inputText.value;
     if (str) {
@@ -55,6 +76,8 @@ function isChinese() {
         }
     }
 }
+
+
 /**提示标签**/
 function addReminder(text,inputAreaStyle,alertStyle,node) {
     var p = document.createElement("p");
@@ -81,4 +104,23 @@ function addReminder(text,inputAreaStyle,alertStyle,node) {
             },3000)
         }
     }
+}
+
+function wordCount() {
+    var str=inputText.value;
+    var len=str.length;
+    var num=document.getElementById("inputNum");
+    num.innerHTML=len;
+    if (len>20){
+        num.setAttribute("class","num");
+        var childNode=document.getElementById("alert");
+        var overWord=document.createTextNode("标题字数已超过20个字，请修改~");
+        addReminder(overWord,"inputAreaWrong","alertFail",childNode)
+
+    }
+    else{
+        num.removeAttribute("class");
+    }
+
+
 }

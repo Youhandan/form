@@ -62,6 +62,7 @@
             color: gray;
             margin: 10px;
             padding: 5px;
+            visibility: hidden;
         }
         /*失败提示样式*/
         .alertFail{
@@ -84,6 +85,9 @@
             top:50px;
             width: 90%;
             margin: 0 10px ;
+        }
+        .num{
+            color: red;
         }
 
         .inputAreaNormal:hover{
@@ -118,7 +122,7 @@
     <div id="inputItem" class="inputItem">
         <div class="inputBox">
             <input type="text" id="inputText" class="inputAreaNormal" placeholder="请输入专属活动标题，仅支持中文">
-            <span  class="numTag"><strong id="inputNum">0</strong> / 20</span>
+            <span id="numTag" class="numTag"><strong id="inputNum">0</strong> / 20</span>
         </div>
     </div>
 </div>
